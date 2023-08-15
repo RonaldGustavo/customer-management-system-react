@@ -1,0 +1,186 @@
+.container_dashboard {
+  background-color: white;
+  min-height: 100vh;
+}
+
+.container_wrap {
+  margin: 0px 20px;
+}
+
+.container-data {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin: 0px 20px 0px 20px;
+}
+
+.table-data {
+  font-size: 1.3rem;
+}
+
+.heading {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  padding-top: 20px;
+}
+
+.header_table {
+  background-color: bisque;
+  align-items: center;
+  margin: auto;
+  justify-content: center;
+}
+
+.heading_dashboard {
+  margin-left: 10px;
+  padding-top: 20px;
+  text-align: left;
+}
+
+.btn-update {
+  padding: 10px 20px;
+  border-radius: 15px;
+  border: none;
+  background-color: var(--primary-color);
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+  font-size: 1.2rem;
+  margin: 10px 5px;
+  color: white;
+}
+
+.btn-update:hover {
+  cursor: pointer;
+  background-color: var(--secondary-color);
+}
+
+.btn-view {
+  padding: 10px 30px;
+  border-radius: 15px;
+  border: none;
+  background-color: blueviolet;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+  font-size: 1.2rem;
+  margin: 10px 5px;
+  color: white;
+}
+
+.btn-view:hover {
+  cursor: pointer;
+  background-color: var(--secondary-color);
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-delete {
+  padding: 10px 20px;
+  border-radius: 15px;
+  border: none;
+  background-color: #eb675e;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+  font-size: 1.2rem;
+  margin: 10px 5px;
+  color: white;
+}
+
+.btn-delete:hover {
+  cursor: pointer;
+  background-color: var(--secondary-color);
+}
+
+.group_button {
+  display: flex;
+  gap: 30px;
+  margin: 30px 0px;
+}
+
+.btn-logout {
+  padding: 10px 20px;
+  border-radius: 15px;
+  border: none;
+  background-color: var(--teritary-color);
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+  font-size: 1.2rem;
+  margin: 10px 15px;
+}
+
+.btn-logout:hover {
+  cursor: pointer;
+  background-color: #eb675e;
+}
+
+.container-adddata {
+  text-align: center;
+  width: 100%;
+  padding-top: 30px;
+}
+
+#form-adddata {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background-color: green; */
+}
+
+.label {
+  font-size: 1.2rem;
+}
+
+.input {
+  width: 50%;
+  text-align: left;
+  padding: 8px;
+  border-radius: 10px;
+  margin: 10px 0px;
+  font-size: 1rem;
+}
+
+#btn-submit {
+  margin-top: 10px;
+  padding: 10px 30px;
+  border-radius: 15px;
+  border: none;
+  background-color: yellowgreen;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+  font-size: 1.2rem;
+}
+
+#btn-submit:hover {
+  cursor: pointer;
+  background-color: var(--secondary-color);
+}
+
+#btn-cancel {
+  margin-top: 10px;
+  padding: 10px 30px;
+  border-radius: 15px;
+  border: none;
+  background-color: cadetblue;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+  font-size: 1.2rem;
+}
+
+#btn-cancel:hover {
+  cursor: pointer;
+  background-color: var(--secondary-color);
+}
+
+.btn-addData {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border-radius: 15px;
+  border: none;
+  background-color: yellow;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+  font-size: 1.2rem;
+}
+
+.btn-addData:hover {
+  cursor: pointer;
+  background-color: salmon;
+}

@@ -1,0 +1,22 @@
+/* Login  */
+@import "../css/auth/Auth.css";
+/* dashboard */
+@import "../css//dashboard//dashboard.css";
+
+:root {
+  --primary-color: #4a55a2;
+  --secondary-color: #7895cb;
+  --teritary-color: #a0bfe0;
+  --teritary1-color: #c5dff8;
+}
+
+body {
+  background: linear-gradient(
+    to right bottom,
+    var(--primary-color) 100%,
+    var(--teritary1-color) 100%
+  );
+  /* background-repeat: no-repeat; */
+  width: 100%;
+  min-height: 100vh;
+}
