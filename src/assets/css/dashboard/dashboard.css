@@ -184,3 +184,48 @@
   cursor: pointer;
   background-color: salmon;
 }
+
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.pagination__link {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 0 20px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 15px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.pagination__link--active {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 0px 10px;
+}
+
+.pagination__link--disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.pagination__link.previous,
+.pagination__link.next {
+  font-weight: bold;
+}
+
+.pagination__link:hover {
+  background-color: #eee;
+  color: #555;
+}
