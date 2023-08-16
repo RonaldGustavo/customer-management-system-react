@@ -12,8 +12,8 @@ import {
 import LoginPage from "../pages/auth/Login";
 import RegisterPage from "../pages/auth/Register";
 import DashboardPage from "../pages/dashboard/Dashboard";
-import EditDataOrder from "../components/dashboard/EditDataOrder";
-import AddDataOrder from "../components/dashboard/AddDataOrder";
+import EditDataOrder from "../components/dashboard/orderManagement/EditDataOrder";
+import AddDataOrder from "../components/dashboard/orderManagement/AddDataOrder";
 
 const Routing = () => {
   return (

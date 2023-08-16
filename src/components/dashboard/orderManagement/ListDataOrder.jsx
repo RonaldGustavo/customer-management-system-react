@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import { ListOrders, DeleteOrders } from "../../services/OrderServices";
+import { ListOrders, DeleteOrders } from "../../../services/OrderServices";
 
 import ReactPaginate from "react-paginate";
 
 
 const ListDataOrder = () => {
   const [dataListOrder, setDataListOrder] = useState([]);
-  const [modalData, setModalData] = useState({}); 
+  const [modalData, setModalData] = useState({});
   const [currentPage, setCurrentPage] = useState(0);
 
-  const itemsPerPage = 4; 
+  const itemsPerPage = 4;
   const pageCount = Math.ceil(dataListOrder.length / itemsPerPage);
 
 
@@ -41,7 +41,7 @@ const ListDataOrder = () => {
       if (result.isConfirmed) {
         DeleteOrders(urlAPIDelete)
           .then(() => {
-            GetDataOrder(); 
+            GetDataOrder();
           })
           .catch((err) => {
             console.log(err.message);
@@ -52,7 +52,7 @@ const ListDataOrder = () => {
   };
 
   const HandleViewDetail = (data) => {
-    setModalData(data); 
+    setModalData(data);
   };
 
   const GetDataOrder = async () => {
@@ -69,66 +69,79 @@ const ListDataOrder = () => {
     GetDataOrder();
   }, []);
 
+  const HandleAddData = () => {
+    navigate("/auth/dashboard/adddata");
+};
+
   return (
     <div className="container-data">
-      <h1 className="heading">Data Orders</h1>
       <div className="table-responsive">
+      <h1 className="heading_header">Data Orders</h1>
+      <div className="group_button_header">
 
-      <table border={1} cellPadding={7} cellSpacing={0} className="table-data table table-bordered table-hover">
-        <thead>
-          <tr className="header_table">
-            <th>id</th>
-            <th>Order_code</th>
-            <th>Order_name</th>
-            <th>Description</th>
-            <th>Created_date</th>
-            <th>Updated_date</th>
-            <th>Created_by</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {displayedData.map((data) => (
-            <tr key={data.id}>
-              <td>{data.id}</td>
-              <td>{data.order_code}</td>
-              <td>{data.order_name}</td>
-              <td>{data.description}</td>
-              <td>{data.created_date}</td>
-              <td>{data.updated_date}</td>
-              <td>{data.created_by}</td>
-              <td className="action">
-                <button
-                  className="btn-update"
-                  onClick={() => {
-                    navigate("/auth/dashboard/editdata/" + data.id);
-                  }}
-                >
-                  Update
-                </button>
-                <button
-                  className="btn-delete"
-                  onClick={() => {
-                    RemoveData(data.id);
-                  }}
-                >
-                  Delete
-                </button>
-                <button
-                  className="btn-view"
-                  onClick={() => {
-                    HandleViewDetail(data); 
-                  }}
-                  data-bs-target="#exampleModal"
-                  data-bs-toggle="modal"
-                >
-                  View
-                </button>
-              </td>
+      <button className="btn-addData" onClick={HandleAddData}>
+        Add Data
+      </button>
+      </div>
+
+        <table border={1} cellPadding={3} cellSpacing={0} className="table-data table table-bordered table-hover">
+          <thead>
+            <tr className="header_table">
+              <th>id</th>
+              <th>Order_code</th>
+              <th>Order_name</th>
+              <th>Description</th>
+              <th>Created_date</th>
+              <th>Updated_date</th>
+              <th>Created_by</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {displayedData.map((data) => (
+              <tr key={data.id}>
+                <td>{data.id}</td>
+                <td>{data.order_code}</td>
+                <td>{data.order_name}</td>
+                <td>{data.description}</td>
+                <td>{data.created_date}</td>
+                <td>{data.updated_date}</td>
+                <td>{data.created_by}</td>
+                <td className="action">
+                <div className="action_container">
+                  
+                  <button
+                    className="btn-update"
+                    onClick={() => {
+                      navigate("/auth/dashboard/editdata/" + data.id);
+                    }}
+                  >
+                    Update
+                  </button>
+                  <button
+                    className="btn-delete"
+                    onClick={() => {
+                      RemoveData(data.id);
+                    }}
+                  >
+                    Delete
+                  </button>
+                  <button
+                    className="btn-view"
+                    onClick={() => {
+                      HandleViewDetail(data);
+                    }}
+                    data-bs-target="#exampleModal"
+                    data-bs-toggle="modal"
+                  >
+                    View
+                  </button>
+                      </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       <ReactPaginate
@@ -165,7 +178,7 @@ const ListDataOrder = () => {
             </div>
             <div className="modal-body">
               <form>
-               
+
                 <div className="mb-3">
                   <label htmlFor="idOrder" className="col-form-label">
                     Id
@@ -199,7 +212,7 @@ const ListDataOrder = () => {
                     className="form-control"
                     id="idOrderName"
                     value={modalData.order_name || ""}
-                    disabled                  />
+                    disabled />
                 </div>
                 <div className="mb-3">
                   <label htmlFor="iddescription" className="col-form-label">
@@ -222,7 +235,7 @@ const ListDataOrder = () => {
                     className="form-control"
                     id="idcreatedat"
                     value={modalData.created_date || ""}
-                    disabled                  />
+                    disabled />
                 </div>
                 <div className="mb-3">
                   <label htmlFor="idupdatedat" className="col-form-label">

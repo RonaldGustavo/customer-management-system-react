@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 // service
-import { ListOrders } from "../../services/OrderServices";
-import { UpdateOrder } from "../../services/OrderServices";
+import { ListOrders } from "../../../services/OrderServices";
+import { UpdateOrder } from "../../../services/OrderServices";
 
 // alert
 import Swal from "sweetalert2";

@@ -1,0 +1,14 @@
+.logoNavbar {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
+
+
+  .dropdown-menu{
+    cursor: pointer;
+  }
+
+  .navbar-expand-lg {
+    background-color: #666154;
+  }
