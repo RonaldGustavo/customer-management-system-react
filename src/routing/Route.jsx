@@ -11,9 +11,9 @@ import {
 // Pages
 import LoginPage from "../pages/auth/Login";
 import RegisterPage from "../pages/auth/Register";
-import DashboardPage from "../pages/dashboard/Dashboard";
-import EditDataOrder from "../components/dashboard/orderManagement/EditDataOrder";
-import AddDataOrder from "../components/dashboard/orderManagement/AddDataOrder";
+import OrderManagementPage from "../pages/dashboard/OrderManagementPage";
+import CustomerManagementPage from "../pages/dashboard/CustomerManagementPage";
+import AuthManagementPage from "../pages/dashboard/AuthManagementPage";
 
 const Routing = () => {
   return (
@@ -21,14 +21,14 @@ const Routing = () => {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="auth/dashboard" element={<DashboardPage />} />
+        <Route path="auth/dashboard/order" element={<OrderManagementPage />} />
         <Route
-          path="auth/dashboard/editdata/:dataid"
-          element={<EditDataOrder />}
+          path="auth/dashboard/customer"
+          element={<CustomerManagementPage />}
         />
-        <Route path="auth/dashboard/adddata" element={<AddDataOrder />} />
+        <Route path="auth/dashboard/auth" element={<AuthManagementPage />} />
 
-        {/* redirect automatic to "/" if random path */}
+        {/* redirect if random path */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>

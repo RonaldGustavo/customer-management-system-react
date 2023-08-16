@@ -20,7 +20,7 @@ const LoginForm = () => {
   const AuthUser = localStorage.getItem("authUser");
   useEffect(() => {
     if (AuthUser) {
-      navigate("/auth/dashboard");
+      navigate("/auth/dashboard/order");
     }
   });
 
@@ -40,7 +40,7 @@ const LoginForm = () => {
         timer: 1500,
       }).then(() => {
         localStorage.setItem("authUser", dataUsername);
-        navigate("/auth/dashboard");
+        navigate("/auth/dashboard/order");
       });
     } else {
       Swal.fire({

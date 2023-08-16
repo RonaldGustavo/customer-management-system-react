@@ -5,10 +5,8 @@ import logoCompany from "../../../assets/images/LogoCompany.png";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
-
 const Navbar = (props) => {
-
-const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const HandleLogout = () => {
     localStorage.removeItem("authUser");
@@ -24,7 +22,7 @@ const navigate = useNavigate()
   };
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary navbar-header">
+      <nav className="navbar navbar-expand-lg navbar-header">
         <div className="container-fluid">
           <img src={logoCompany} className="logoNavbar" />
           <a className="navbar-brand" href="#">
@@ -41,8 +39,10 @@ const navigate = useNavigate()
               >
                 {props.username}
               </button>
-              <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-          
+              <ul
+                className="dropdown-menu dropdown-menu-end"
+                aria-labelledby="profileDropdown"
+              >
                 <li>
                   <a className="dropdown-item" onClick={HandleLogout}>
                     Logout

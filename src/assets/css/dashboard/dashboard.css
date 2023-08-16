@@ -31,20 +31,19 @@
   margin: auto;
   justify-content: center;
 }
-
-.heading_dashboard {
+btn-view .heading_dashboard {
   margin-left: 10px;
   padding-top: 20px;
   text-align: left;
 }
 
 .btn-update {
-  padding: 10px 20px;
+  padding: 5px 20px;
   border-radius: 15px;
   border: none;
   background-color: var(--primary-color);
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin: 10px 5px;
   color: white;
 }
@@ -55,12 +54,12 @@
 }
 
 .btn-view {
-  padding: 10px 30px;
+  padding: 5px 20px;
   border-radius: 15px;
   border: none;
   background-color: blueviolet;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin: 10px 5px;
   color: white;
 }
@@ -76,18 +75,15 @@
     align-items: center;
     justify-content: center;
   }
- 
 }
 
-
-
 .btn-delete {
-  padding: 10px 20px;
+  padding: 5px 20px;
   border-radius: 15px;
   border: none;
   background-color: #eb675e;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin: 10px 5px;
   color: white;
 }
@@ -102,8 +98,6 @@
   gap: 30px;
   margin: 30px 0px;
 }
-
-
 
 .container-adddata {
   text-align: center;
@@ -132,21 +126,6 @@
   font-size: 1rem;
 }
 
-#btn-submit {
-  margin-top: 10px;
-  padding: 10px 30px;
-  border-radius: 15px;
-  border: none;
-  background-color: yellowgreen;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
-  font-size: 1.2rem;
-}
-
-#btn-submit:hover {
-  cursor: pointer;
-  background-color: var(--secondary-color);
-}
-
 #btn-cancel {
   margin-top: 10px;
   padding: 10px 30px;
@@ -165,19 +144,19 @@
 .btn-addData {
   margin-top: 10px;
   margin-bottom: 30px;
-  padding: 10px 20px;
+  padding: 5px 20px;
   border-radius: 15px;
   border: none;
-  background-color: yellow;
+  background-color: teal;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
-  font-size: 1.2rem;
+  font-size: 1rem;
+  color: white;
 }
 
 .btn-addData:hover {
   cursor: pointer;
   background-color: salmon;
 }
-
 
 .pagination {
   display: flex;
@@ -229,7 +208,17 @@
 }
 
 .heading_header {
+  font-size: 1.7rem;
+  color: #333333;
+  margin: 20px 0px;
   text-align: left;
-  margin-top: 20px;
+}
+
+table td {
+  font-size: 1rem;
+}
+
+table th {
+  font-size: 1.2rem;
   font-weight: 500;
 }
