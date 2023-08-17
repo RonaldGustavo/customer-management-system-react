@@ -18,6 +18,7 @@ const OrderDataComponent = () => {
   const [dataListOrder, setDataListOrder] = useState([]);
   const [modalData, setModalData] = useState({});
   const [currentPage, setCurrentPage] = useState(0);
+  const [isClose, setIsClose] = useState("noModal");
 
   const [id, setId] = useState(0);
   const [dataOrderCode, setDataOrderCode] = useState("");
@@ -27,8 +28,15 @@ const OrderDataComponent = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    setIsClose("noModal");
     handleGetOrder();
   }, []);
+
+  useEffect(() => {
+    if (dataOrderName && dataDescripton) {
+      setIsClose("modal");
+    }
+  }, [dataOrderName, dataDescripton]);
 
   const getDataUser = localStorage.getItem("authUser");
 
@@ -127,8 +135,11 @@ const OrderDataComponent = () => {
         showConfirmButton: false,
         timer: 1500,
       }).then(() => {
+        handleGetOrder();
         setDataOrderCode(GenerateOrderCode);
-        window.location.reload();
+        setDataOrderName("");
+        setDataDescrption("");
+        setIsClose("noModal");
       });
     } catch (error) {
       console.log(error.message);
@@ -170,7 +181,10 @@ const OrderDataComponent = () => {
       showConfirmButton: false,
       timer: 1500,
     }).then(() => {
-      window.location.reload();
+      handleGetOrder();
+      setDataOrderName("");
+      setDataDescrption("");
+      setIsClose("noModal");
     });
   };
 
@@ -468,6 +482,7 @@ const OrderDataComponent = () => {
                   type="button"
                   className="btn btn-primary"
                   onClick={handleCreateOrder}
+                  data-bs-dismiss={isClose}
                 >
                   Submit Order
                 </button>
@@ -574,6 +589,7 @@ const OrderDataComponent = () => {
                 type="button"
                 className="btn btn-primary"
                 onClick={handleUpdateOrder}
+                data-bs-dismiss={isClose}
               >
                 Update Order
               </button>

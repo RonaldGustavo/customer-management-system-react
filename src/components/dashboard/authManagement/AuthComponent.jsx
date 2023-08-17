@@ -96,8 +96,8 @@ const AuthComponent = () => {
       setIsClose("noModal");
 
       // Add the new user
-      setUsers((prevUsers) => [...prevUsers, newUser]);
-
+      users.push(newUser);
+      console.log(DataUser);
       Swal.fire("Success", "User has been added.", "success");
       // Reset the input fields
       setDataUsername("");
@@ -111,7 +111,7 @@ const AuthComponent = () => {
   // Update User
   const handleUpdateUser = () => {
     if (!username || !password || !address) {
-      Swal.fire("Error", "All fields are required.", "error");
+      Swal.fire("Validation Error", "All fields are required.", "error");
       return;
     }
 
@@ -290,7 +290,7 @@ const AuthComponent = () => {
                       Password
                     </label>
                     <input
-                      type="text"
+                      type="password"
                       name="idPassword"
                       id="idPassword"
                       className="form-control"

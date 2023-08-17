@@ -18,7 +18,7 @@
   margin-bottom: 15px;
 }
 
-.menu-item a {
+.menu-item p {
   text-decoration: none;
   color: white;
   font-size: 18px;
@@ -28,7 +28,7 @@
   transition: background-color 0.3s;
 }
 
-.menu-item a:hover {
+.menu-item p:hover {
   background-color: #555;
   cursor: pointer;
 }

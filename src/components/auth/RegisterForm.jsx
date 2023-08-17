@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+// utils
+import { generateRandomNumber } from "../../utilities/GenerateRandom";
+
 //image
 import imageBackground from "../../assets/images/login/backgroundLogin.jpeg";
 
@@ -13,21 +16,34 @@ import DataUser from "../../data/Datauser";
 const RegisterForm = () => {
   const [dataUsername, setDataUsername] = useState("");
   const [dataPassword, setDataPassword] = useState("");
+  const [dataAddress, setDataAddress] = useState("");
 
   // disable button
   const [isButtonDisabled, setButtonDisabled] = useState(false);
 
   const navigate = useNavigate();
+  const currenDate = new Date().toLocaleString();
+  const randomNumbers = generateRandomNumber(10000, 99999);
+  const generateUserId = `USR${randomNumbers}`;
 
   const handleRegister = async (event) => {
     event.preventDefault();
+
+    if (!dataUsername || !dataPassword || !dataAddress) {
+      Swal.fire("Validation Error", "All fields are required.", "error");
+      return;
+    }
 
     try {
       setButtonDisabled(true);
 
       const newUser = {
+        userId: generateUserId,
         username: dataUsername,
         password: dataPassword,
+        address: dataAddress,
+        created_date: currenDate,
+        updated_date: currenDate,
       };
 
       DataUser.push(newUser);
@@ -52,14 +68,11 @@ const RegisterForm = () => {
   };
   return (
     <>
-      <section className="vh-100" style={{ backgroundColor: "#eee;" }}>
+      <section className="vh-100">
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-lg-12 col-xl-11">
-              <div
-                className="card text-black"
-                style={{ borderRadius: "25px;" }}
-              >
+              <div className="card text-black" style={{ borderRadius: "25px" }}>
                 <div className="card-body p-md-5">
                   <div className="row justify-content-center">
                     <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
@@ -71,48 +84,57 @@ const RegisterForm = () => {
                         onSubmit={handleRegister}
                         method="post"
                       >
-                        <div className="d-flex flex-row align-items-center mb-4">
-                          <i className="fas fa-user fa-lg me-3 fa-fw"></i>
-                          <div className="form-outline flex-fill mb-0">
-                            <label className="form-label" htmlFor="inputName">
-                              Username
-                            </label>
+                        <div className="mb-4">
+                          <div className="input-group">
+                            <span className="input-group-text">
+                              <i className="fas fa-user fa-lg me-3 fa-fw"></i>
+                            </span>
                             <input
                               type="text"
-                              id="inputName"
                               className="form-control"
                               name="username"
                               onChange={(e) => {
                                 setDataUsername(e.target.value);
                               }}
                               value={dataUsername}
-                              required
+                              placeholder="Username"
                             />
                           </div>
                         </div>
-                        <div className="d-flex flex-row align-items-center mb-4">
-                          <i className="fas fa-user fa-lg me-3 fa-fw"></i>
-                          <div className="form-outline flex-fill mb-0">
-                            <label
-                              className="form-label"
-                              htmlFor="inputPassword"
-                            >
-                              Password
-                            </label>
+                        <div className="mb-4">
+                          <div className="input-group">
+                            <span className="input-group-text">
+                              <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
+                            </span>
                             <input
                               type="password"
-                              id="inputPassword"
                               className="form-control"
                               name="password"
                               onChange={(e) => {
                                 setDataPassword(e.target.value);
                               }}
                               value={dataPassword}
-                              required
+                              placeholder="Password"
                             />
                           </div>
                         </div>
-
+                        <div className="mb-4">
+                          <div className="input-group">
+                            <span className="input-group-text">
+                              <i className="fas fa-map-marker-alt fa-lg me-3 fa-fw"></i>
+                            </span>
+                            <input
+                              type="text"
+                              className="form-control"
+                              name="address"
+                              onChange={(e) => {
+                                setDataAddress(e.target.value);
+                              }}
+                              value={dataAddress}
+                              placeholder="Address"
+                            />
+                          </div>
+                        </div>
                         <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                           <button
                             type="submit"

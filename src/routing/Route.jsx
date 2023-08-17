@@ -16,6 +16,7 @@ import CustomerManagementPage from "../pages/dashboard/CustomerManagementPage";
 import AuthManagementPage from "../pages/dashboard/AuthManagementPage";
 
 const Routing = () => {
+  const lastVisitedPage = localStorage.getItem("lastVisitedPage");
   return (
     <Router>
       <Routes>
@@ -29,7 +30,7 @@ const Routing = () => {
         <Route path="auth/dashboard/auth" element={<AuthManagementPage />} />
 
         {/* redirect if random path */}
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="*" element={<Navigate to={lastVisitedPage || "/"} />} />
       </Routes>
     </Router>
   );

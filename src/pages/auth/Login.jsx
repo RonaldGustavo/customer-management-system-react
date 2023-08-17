@@ -11,9 +11,12 @@ const LoginPage = () => {
   useEffect(() => {
     const lastVisitedPage = localStorage.getItem("lastVisitedPage");
     if (lastVisitedPage) {
-      navigate(lastVisitedPage);
+      // Add a delay before navigating
+      setTimeout(() => {
+        navigate(lastVisitedPage);
+      }, 500); // Delay of 500 milliseconds
     }
-  });
+  }, []);
   return (
     <>
       <LoginForm />

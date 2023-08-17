@@ -45,7 +45,7 @@ const LoginForm = () => {
     } else {
       Swal.fire({
         icon: "error",
-        title: "Wrong Validation",
+        title: "Validation Error",
         text: "Invalid username or password",
       });
     }

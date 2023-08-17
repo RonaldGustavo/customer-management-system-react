@@ -8,34 +8,34 @@ const Aside = () => {
     <div className="aside">
       <ul className="menu-list">
         <li className="menu-item">
-          <a
+          <p
             onClick={() => {
               navigate("/auth/dashboard/order");
             }}
             id="menu_order"
           >
             Order Management
-          </a>
+          </p>
         </li>
         <li className="menu-item">
-          <a
+          <p
             onClick={() => {
               navigate("/auth/dashboard/customer");
             }}
             id="menu_customer"
           >
             Customer Management
-          </a>
+          </p>
         </li>
         <li className="menu-item">
-          <a
+          <p
             onClick={() => {
               navigate("/auth/dashboard/auth");
             }}
             id="menu_auth"
           >
             Auth Management
-          </a>
+          </p>
         </li>
       </ul>
     </div>
