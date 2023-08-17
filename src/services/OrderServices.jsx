@@ -1,4 +1,4 @@
-export async function CreateOrder(endpoint, postData) {
+export async function createOrder(endpoint, postData) {
   try {
     const response = await fetch(endpoint, {
       method: "POST",
@@ -20,7 +20,7 @@ export async function CreateOrder(endpoint, postData) {
   }
 }
 
-export async function UpdateOrder(endpoint, postData) {
+export async function updateOrder(endpoint, postData) {
   try {
     const response = await fetch(endpoint, {
       method: "PUT",
@@ -42,7 +42,7 @@ export async function UpdateOrder(endpoint, postData) {
   }
 }
 
-export async function ListOrders(endpoint) {
+export async function listOrders(endpoint) {
   try {
     const response = await fetch(endpoint, {
       method: "GET",
@@ -63,7 +63,7 @@ export async function ListOrders(endpoint) {
   }
 }
 
-export async function DeleteOrders(endpoint) {
+export async function deleteOrders(endpoint) {
   try {
     const response = await fetch(endpoint, {
       method: "DELETE",

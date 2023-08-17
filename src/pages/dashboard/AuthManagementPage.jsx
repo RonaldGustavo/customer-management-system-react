@@ -14,6 +14,7 @@ const AuthManagementPage = () => {
     if (!AuthUser) {
       navigate("/");
     }
+    localStorage.setItem("lastVisitedPage", window.location.pathname);
   }, [AuthUser, navigate]);
 
   return (

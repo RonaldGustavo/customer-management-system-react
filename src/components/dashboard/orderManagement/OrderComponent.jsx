@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import ReactPaginate from "react-paginate";
 
 // services
-import { ListOrders, DeleteOrders } from "../../../services/OrderServices";
-import { CreateOrder } from "../../../services/OrderServices";
-import { UpdateOrder } from "../../../services/OrderServices";
+import {
+  listOrders,
+  deleteOrders,
+  createOrder,
+  updateOrder,
+} from "../../../services/OrderServices";
 
-import ReactPaginate from "react-paginate";
+// utils
+import { generateRandomNumber } from "../../../utilities/GenerateRandom";
 
 const OrderDataComponent = () => {
   const [dataListOrder, setDataListOrder] = useState([]);
@@ -18,34 +23,43 @@ const OrderDataComponent = () => {
   const [dataOrderCode, setDataOrderCode] = useState("");
   const [dataOrderName, setDataOrderName] = useState("");
   const [dataDescripton, setDataDescrption] = useState("");
+  const [isCreatingOrder, setIsCreatingOrder] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    handleGetOrder();
+  }, []);
+
   const getDataUser = localStorage.getItem("authUser");
+
   // limit
   const itemsPerPage = 6;
   const pageCount = Math.ceil(dataListOrder.length / itemsPerPage);
 
-  const handlePageClick = ({ selected }) => {
-    setCurrentPage(selected);
-  };
-
-  useEffect(() => {
-    GetDataOrder();
-  }, []);
   const startIndex = currentPage * itemsPerPage;
   const displayedData = dataListOrder.slice(
     startIndex,
     startIndex + itemsPerPage
   );
 
+  // Handle Page Clicked
+  const handlePageClick = ({ selected }) => {
+    setCurrentPage(selected);
+  };
+
+  // Set Modal Data
+  const handleViewDetail = (datas) => {
+    setModalData(datas);
+  };
+
   // Delete Order
-  const RemoveData = async (id) => {
+  const handleDeleteOrder = async (id) => {
     const urlAPIDelete =
       "https://64db7a91593f57e435b105e8.mockapi.io/orders/" + id;
 
     Swal.fire({
       title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      text: `Delete ID: ${id}`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -53,9 +67,9 @@ const OrderDataComponent = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        DeleteOrders(urlAPIDelete)
+        deleteOrders(urlAPIDelete)
           .then(() => {
-            GetDataOrder();
+            handleGetOrder();
           })
           .catch((err) => {
             console.log(err.message);
@@ -65,18 +79,24 @@ const OrderDataComponent = () => {
     });
   };
 
-  const generateRandomNumber = (min, max) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
-
   // Create New Order
-  const HandleSubmit = async (e) => {
+  const handleCreateOrder = async (e) => {
     e.preventDefault();
 
-    const randomNumbers = generateRandomNumber(10000, 99999); // Angka 5 digit
+    // jika true proses selesai
+    if (isCreatingOrder) {
+      return;
+    }
+
+    // set Order On Progress mencegah double submit
+    setIsCreatingOrder(true);
+
+    const randomNumbers = generateRandomNumber(10000, 99999);
     const GenerateOrderCode = `ORD${randomNumbers}`;
 
     if (!dataOrderName || !dataDescripton) {
+      // reset
+      setIsCreatingOrder(false);
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -97,37 +117,51 @@ const OrderDataComponent = () => {
       created_by: getDataUser,
     };
 
-    const response = await CreateOrder(urlCreateOrder, postData);
+    try {
+      const response = await createOrder(urlCreateOrder, postData);
 
-    Swal.fire({
-      position: "top-end",
-      icon: "success",
-      title: `Success Created`,
-      showConfirmButton: false,
-      timer: 1500,
-    }).then(() => {
-      setDataOrderCode(GenerateOrderCode);
-      window.location.reload();
-    });
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: `Success Created`,
+        showConfirmButton: false,
+        timer: 1500,
+      }).then(() => {
+        setDataOrderCode(GenerateOrderCode);
+        window.location.reload();
+      });
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      // reset
+      setIsCreatingOrder(false);
+    }
   };
 
   // Update Order
-  const HandleUpdate = async (e) => {
+  const handleUpdateOrder = async (e) => {
     e.preventDefault();
+
+    if (!dataOrderName || !dataDescripton) {
+      Swal.fire("Error", "All fields are required.", "error");
+
+      return;
+    }
+
     const urlAPIUpdate =
       "https://64db7a91593f57e435b105e8.mockapi.io/orders/" + modalData.id;
     const currenDate = new Date().toLocaleString();
 
     const putData = {
       id: id,
-      order_code: dataOrderCode,
+      order_code: modalData.order_code,
       order_name: dataOrderName,
       description: dataDescripton,
       updated_date: currenDate,
       created_by: getDataUser,
     };
 
-    const res = await UpdateOrder(urlAPIUpdate, putData);
+    const res = await updateOrder(urlAPIUpdate, putData);
 
     Swal.fire({
       position: "top-end",
@@ -141,19 +175,14 @@ const OrderDataComponent = () => {
   };
 
   // Get Data Orders
-  const GetDataOrder = async () => {
+  const handleGetOrder = async () => {
     const apiOrders = "https://64db7a91593f57e435b105e8.mockapi.io/orders";
     try {
-      const responseData = await ListOrders(apiOrders);
+      const responseData = await listOrders(apiOrders);
       setDataListOrder(responseData);
     } catch (error) {
       console.log(error);
     }
-  };
-
-  // Set Modal Data
-  const HandleViewDetail = (datas) => {
-    setModalData(datas);
   };
 
   return (
@@ -205,7 +234,7 @@ const OrderDataComponent = () => {
                       data-bs-target="#modaledit"
                       data-bs-toggle="modal"
                       onClick={() => {
-                        HandleViewDetail(data);
+                        handleViewDetail(data);
                       }}
                     >
                       Update
@@ -213,7 +242,7 @@ const OrderDataComponent = () => {
                     <button
                       className="btn-delete"
                       onClick={() => {
-                        RemoveData(data.id);
+                        handleDeleteOrder(data.id);
                       }}
                     >
                       Delete
@@ -221,9 +250,9 @@ const OrderDataComponent = () => {
                     <button
                       className="btn-view"
                       onClick={() => {
-                        HandleViewDetail(data);
+                        handleViewDetail(data);
                       }}
-                      data-bs-target="#exampleModal"
+                      data-bs-target="#modalDetailOrder"
                       data-bs-toggle="modal"
                     >
                       View
@@ -251,15 +280,15 @@ const OrderDataComponent = () => {
       {/* modal detail */}
       <div
         className="modal fade"
-        id="exampleModal"
+        id="modalDetailOrder"
         tabIndex={-1}
-        aria-labelledby="exampleModalLabel"
+        aria-labelledby="DetailOrderLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog modal-lg">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">
+              <h1 className="modal-title fs-5" id="DetailOrderLabel">
                 Detail Order
               </h1>
               <button
@@ -375,13 +404,13 @@ const OrderDataComponent = () => {
         className="modal fade"
         id="modaladd"
         tabIndex={-1}
-        aria-labelledby="exampleModalLabel"
+        aria-labelledby="AddOrderLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog modal-lg">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">
+              <h1 className="modal-title fs-5" id="AddOrderLabel">
                 Create New Order
               </h1>
               <button
@@ -438,7 +467,7 @@ const OrderDataComponent = () => {
                 <button
                   type="button"
                   className="btn btn-primary"
-                  onClick={HandleSubmit}
+                  onClick={handleCreateOrder}
                 >
                   Submit Order
                 </button>
@@ -453,13 +482,13 @@ const OrderDataComponent = () => {
         className="modal fade"
         id="modaledit"
         tabIndex={-1}
-        aria-labelledby="exampleModalLabel"
+        aria-labelledby="EditOrderLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog modal-dialog-centered modal-lg">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">
+              <h1 className="modal-title fs-5" id="EditOrderLabel">
                 Edit Order
               </h1>
               <button
@@ -544,9 +573,9 @@ const OrderDataComponent = () => {
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={HandleUpdate}
+                onClick={handleUpdateOrder}
               >
-                Submit Order
+                Update Order
               </button>
             </div>
           </div>
