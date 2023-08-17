@@ -204,7 +204,8 @@ btn-view .heading_dashboard {
 
 .group_button_header {
   display: flex;
-  justify-content: end;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .heading_header {
@@ -221,4 +222,15 @@ table td {
 table th {
   font-size: 1.2rem;
   font-weight: 500;
+}
+
+.search-input {
+  width: 280px; /* Adjust width as needed */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-right: 10px; /* Add some spacing between the search input and the "Add New Users" button */
+  margin-bottom: 10px;
+  height: 40px;
 }

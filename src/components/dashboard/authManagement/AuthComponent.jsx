@@ -17,13 +17,24 @@ const AuthComponent = () => {
   const [isClose, setIsClose] = useState("noModal");
   const [modalData, setModalData] = useState({});
   const [currentPage, setCurrentPage] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredData = users.filter(
+    (user) =>
+      user.userId.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.password.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.address.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   // limit
   const itemsPerPage = 5;
-  const pageCount = Math.ceil(users.length / itemsPerPage);
-
+  const pageCount = Math.ceil(filteredData.length / itemsPerPage);
   const startIndex = currentPage * itemsPerPage;
-  const displayedData = users.slice(startIndex, startIndex + itemsPerPage);
+  const displayedData = filteredData.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
   // Handle Page Clicked
   const handlePageClick = ({ selected }) => {
@@ -156,6 +167,13 @@ const AuthComponent = () => {
         <h1 className="heading_header">Auth Management</h1>
         <div className="table-responsive">
           <div className="group_button_header">
+            <input
+              type="text"
+              placeholder="Search..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="search-input"
+            />
             <button
               className="btn-addData"
               data-bs-target="#modaladd"

@@ -13,6 +13,7 @@ const CustomerComponent = () => {
   const [dataListOrder, setDataListOrder] = useState([]);
   const [modalData, setModalData] = useState({});
   const [currentPage, setCurrentPage] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const navigate = useNavigate();
 
@@ -20,12 +21,23 @@ const CustomerComponent = () => {
     handleGetDataCustomers();
   }, []);
 
+  const filteredData = dataListOrder.filter(
+    (data) =>
+      data.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      data.customer_id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      data.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      data.address.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      data.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      data.gender.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      data.no_hp.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   // limit
   const itemsPerPage = 6;
-  const pageCount = Math.ceil(dataListOrder.length / itemsPerPage);
+  const pageCount = Math.ceil(filteredData.length / itemsPerPage);
 
   const startIndex = currentPage * itemsPerPage;
-  const displayedData = dataListOrder.slice(
+  const displayedData = filteredData.slice(
     startIndex,
     startIndex + itemsPerPage
   );
@@ -83,6 +95,15 @@ const CustomerComponent = () => {
     <div className="container-data">
       <h1 className="heading_header">Customer Management</h1>
       <div className="table-responsive">
+        <div className="group_button_header">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-input"
+          />
+        </div>
         <table
           border={1}
           cellPadding={3}

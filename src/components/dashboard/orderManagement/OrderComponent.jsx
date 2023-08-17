@@ -25,7 +25,18 @@ const OrderDataComponent = () => {
   const [dataOrderName, setDataOrderName] = useState("");
   const [dataDescripton, setDataDescrption] = useState("");
   const [isCreatingOrder, setIsCreatingOrder] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
   const navigate = useNavigate();
+
+  const filteredData = dataListOrder.filter(
+    (data) =>
+      data.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      data.order_code.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      data.order_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      data.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      data.created_by.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   useEffect(() => {
     setIsClose("noModal");
@@ -42,10 +53,10 @@ const OrderDataComponent = () => {
 
   // limit
   const itemsPerPage = 6;
-  const pageCount = Math.ceil(dataListOrder.length / itemsPerPage);
+  const pageCount = Math.ceil(filteredData.length / itemsPerPage);
 
   const startIndex = currentPage * itemsPerPage;
-  const displayedData = dataListOrder.slice(
+  const displayedData = filteredData.slice(
     startIndex,
     startIndex + itemsPerPage
   );
@@ -204,6 +215,13 @@ const OrderDataComponent = () => {
       <h1 className="heading_header">Order Management</h1>
       <div className="table-responsive">
         <div className="group_button_header">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-input"
+          />
           <button
             className="btn-addData"
             data-bs-target="#modaladd"
