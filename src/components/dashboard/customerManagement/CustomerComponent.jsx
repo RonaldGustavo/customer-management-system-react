@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 import ReactPaginate from "react-paginate";
+
+// alert
+import Swal from "sweetalert2";
 
 // services
 import {
@@ -15,12 +16,12 @@ const CustomerComponent = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const navigate = useNavigate();
-
+  // display Data Customer
   useEffect(() => {
     handleGetDataCustomers();
   }, []);
 
+  // filter
   const filteredData = dataListOrder.filter(
     (data) =>
       data.id.toLowerCase().includes(searchQuery.toLowerCase()) ||

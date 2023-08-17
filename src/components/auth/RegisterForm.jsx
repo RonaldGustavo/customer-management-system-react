@@ -29,12 +29,14 @@ const RegisterForm = () => {
   const handleRegister = async (event) => {
     event.preventDefault();
 
+    // check validasi register
     if (!dataUsername || !dataPassword || !dataAddress) {
       Swal.fire("Validation Error", "All fields are required.", "error");
       return;
     }
 
     try {
+      // disabled button
       setButtonDisabled(true);
 
       const newUser = {
@@ -46,6 +48,7 @@ const RegisterForm = () => {
         updated_date: currenDate,
       };
 
+      // push user
       DataUser.push(newUser);
 
       Swal.fire({

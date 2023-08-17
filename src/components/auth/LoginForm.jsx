@@ -26,7 +26,8 @@ const LoginForm = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    console.log(DataUser.name);
+
+    // check login
     const user = DataUser.find(
       (user) => user.username === dataUsername && user.password === dataPassword
     );

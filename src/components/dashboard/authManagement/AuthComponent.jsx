@@ -19,6 +19,7 @@ const AuthComponent = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
 
+  // filter
   const filteredData = users.filter(
     (user) =>
       user.userId.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -41,6 +42,7 @@ const AuthComponent = () => {
     setCurrentPage(selected);
   };
 
+  // set Default
   useEffect(() => {
     setIsClose("noModal");
   }, []);
@@ -77,6 +79,7 @@ const AuthComponent = () => {
     });
   };
 
+  // check input field terisi
   useEffect(() => {
     if (username && password && address) {
       setIsClose("modal");
@@ -88,6 +91,7 @@ const AuthComponent = () => {
     const randomNumbers = generateRandomNumber(10000, 99999); // Angka 5 digit
     const GenerateUserID = `USR${randomNumbers}`;
 
+    // check validasi create order
     if (!username || !password || !address) {
       Swal.fire("Error", "All fields are required.", "error");
 
@@ -108,8 +112,9 @@ const AuthComponent = () => {
 
       // Add the new user
       users.push(newUser);
-      console.log(DataUser);
+
       Swal.fire("Success", "User has been added.", "success");
+
       // Reset the input fields
       setDataUsername("");
       setDataPassword("");

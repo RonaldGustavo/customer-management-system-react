@@ -29,7 +29,7 @@ const Routing = () => {
         />
         <Route path="auth/dashboard/auth" element={<AuthManagementPage />} />
 
-        {/* redirect if random path */}
+        {/* redirect if random path to last page*/}
         <Route path="*" element={<Navigate to={lastVisitedPage || "/"} />} />
       </Routes>
     </Router>

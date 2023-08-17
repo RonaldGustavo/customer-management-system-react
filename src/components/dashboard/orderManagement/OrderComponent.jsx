@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import ReactPaginate from "react-paginate";
 
@@ -21,14 +20,12 @@ const OrderDataComponent = () => {
   const [isClose, setIsClose] = useState("noModal");
 
   const [id, setId] = useState(0);
-  const [dataOrderCode, setDataOrderCode] = useState("");
   const [dataOrderName, setDataOrderName] = useState("");
   const [dataDescripton, setDataDescrption] = useState("");
   const [isCreatingOrder, setIsCreatingOrder] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const navigate = useNavigate();
-
+  // filter
   const filteredData = dataListOrder.filter(
     (data) =>
       data.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -38,11 +35,13 @@ const OrderDataComponent = () => {
       data.created_by.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // set Default modal
   useEffect(() => {
     setIsClose("noModal");
     handleGetOrder();
   }, []);
 
+  // check value field ter isi
   useEffect(() => {
     if (dataOrderName && dataDescripton) {
       setIsClose("modal");
@@ -147,7 +146,6 @@ const OrderDataComponent = () => {
         timer: 1500,
       }).then(() => {
         handleGetOrder();
-        setDataOrderCode(GenerateOrderCode);
         setDataOrderName("");
         setDataDescrption("");
         setIsClose("noModal");
@@ -164,6 +162,7 @@ const OrderDataComponent = () => {
   const handleUpdateOrder = async (e) => {
     e.preventDefault();
 
+    // check validasi update order
     if (!dataOrderName || !dataDescripton) {
       Swal.fire("Error", "All fields are required.", "error");
 
@@ -557,7 +556,6 @@ const OrderDataComponent = () => {
                     id="ordercode"
                     placeholder="Order Code"
                     className="form-control"
-                    onChange={(e) => setDataOrderCode(e.target.value)}
                     value={modalData.order_code || ""}
                     required
                     disabled

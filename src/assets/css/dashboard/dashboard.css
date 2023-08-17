@@ -1,3 +1,11 @@
+/* container */
+.container-data {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin: 0px 20px 0px 20px;
+}
+
 .container_dashboard {
   background-color: white;
   min-height: 100vh;
@@ -7,34 +15,58 @@
   margin: 0px 20px;
 }
 
-.container-data {
-  text-align: center;
+.action_container {
   display: flex;
-  flex-direction: column;
-  margin: 0px 20px 0px 20px;
-}
-
-.table-data {
-  font-size: 1.3rem;
-}
-
-.heading {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 40px;
-  padding-top: 20px;
-}
-
-.header_table {
-  background-color: bisque;
   align-items: center;
-  margin: auto;
   justify-content: center;
 }
-btn-view .heading_dashboard {
-  margin-left: 10px;
-  padding-top: 20px;
+
+/* form */
+.label {
+  font-size: 1.2rem;
+}
+
+.input {
+  width: 50%;
   text-align: left;
+  padding: 8px;
+  border-radius: 10px;
+  margin: 10px 0px;
+  font-size: 1rem;
+}
+
+/* button */
+.btn-addData {
+  margin-top: 10px;
+  margin-bottom: 30px;
+  padding: 5px 20px;
+  border-radius: 15px;
+  border: none;
+  background-color: teal;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+  font-size: 1rem;
+  color: white;
+}
+
+.btn-addData:hover {
+  cursor: pointer;
+  background-color: salmon;
+}
+
+.btn-delete {
+  padding: 5px 20px;
+  border-radius: 15px;
+  border: none;
+  background-color: #eb675e;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+  font-size: 1rem;
+  margin: 10px 5px;
+  color: white;
+}
+
+.btn-delete:hover {
+  cursor: pointer;
+  background-color: var(--secondary-color);
 }
 
 .btn-update {
@@ -69,95 +101,7 @@ btn-view .heading_dashboard {
   background-color: var(--secondary-color);
 }
 
-.action {
-  .action_container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-.btn-delete {
-  padding: 5px 20px;
-  border-radius: 15px;
-  border: none;
-  background-color: #eb675e;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
-  font-size: 1rem;
-  margin: 10px 5px;
-  color: white;
-}
-
-.btn-delete:hover {
-  cursor: pointer;
-  background-color: var(--secondary-color);
-}
-
-.group_button {
-  display: flex;
-  gap: 30px;
-  margin: 30px 0px;
-}
-
-.container-adddata {
-  text-align: center;
-  width: 100%;
-  padding-top: 30px;
-}
-
-#form-adddata {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* background-color: green; */
-}
-
-.label {
-  font-size: 1.2rem;
-}
-
-.input {
-  width: 50%;
-  text-align: left;
-  padding: 8px;
-  border-radius: 10px;
-  margin: 10px 0px;
-  font-size: 1rem;
-}
-
-#btn-cancel {
-  margin-top: 10px;
-  padding: 10px 30px;
-  border-radius: 15px;
-  border: none;
-  background-color: cadetblue;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
-  font-size: 1.2rem;
-}
-
-#btn-cancel:hover {
-  cursor: pointer;
-  background-color: var(--secondary-color);
-}
-
-.btn-addData {
-  margin-top: 10px;
-  margin-bottom: 30px;
-  padding: 5px 20px;
-  border-radius: 15px;
-  border: none;
-  background-color: teal;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
-  font-size: 1rem;
-  color: white;
-}
-
-.btn-addData:hover {
-  cursor: pointer;
-  background-color: salmon;
-}
-
+/* pagination */
 .pagination {
   display: flex;
   justify-content: center;
@@ -202,12 +146,14 @@ btn-view .heading_dashboard {
   color: #555;
 }
 
+/* grouping div button header */
 .group_button_header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
+/* heading */
 .heading_header {
   font-size: 1.7rem;
   color: #333333;
@@ -215,6 +161,7 @@ btn-view .heading_dashboard {
   text-align: left;
 }
 
+/* table */
 table td {
   font-size: 1rem;
 }
@@ -224,6 +171,11 @@ table th {
   font-weight: 500;
 }
 
+.table-data {
+  font-size: 1.3rem;
+}
+
+/* search filter */
 .search-input {
   width: 280px; /* Adjust width as needed */
   padding: 10px;
