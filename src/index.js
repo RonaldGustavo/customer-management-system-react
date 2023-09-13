@@ -3,11 +3,20 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import Routing from "./routing/Route";
 import reportWebVitals from "./reportWebVitals";
+import { legacy_createStore, applyMiddleware, compose } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import reducers from './reducers';
+
+const store = legacy_createStore(reducers,
+  compose(applyMiddleware(thunk)))
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Routing />
+    <Provider store={store}>
+      <Routing />
+    </Provider>
   </React.StrictMode>
 );
 

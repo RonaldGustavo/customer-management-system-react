@@ -10,8 +10,11 @@ import DataUser from "../../data/Datauser";
 
 // alert
 import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { getUser } from "../../actions/index";
 
 const LoginForm = () => {
+  const dispatch = useDispatch()
   const [dataUsername, setDataUsername] = useState("");
   const [dataPassword, setDataPassword] = useState("");
 
@@ -40,6 +43,7 @@ const LoginForm = () => {
         showConfirmButton: false,
         timer: 1500,
       }).then(() => {
+        dispatch(getUser(dataUsername))
         localStorage.setItem("authUser", dataUsername);
         navigate("/auth/dashboard/order");
       });

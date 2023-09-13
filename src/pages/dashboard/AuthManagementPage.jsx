@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 // components
 import Navbar from "../../components/dashboard/Layout/Navbar";
 import Aside from "../../components/dashboard/Layout/Aside";
-import AuthComponent from "../../components/dashboard/authManagement/AuthComponent";
+import AuthComponent from "../../components/dashboard/AuthManagement/AuthComponent";
 
 const AuthManagementPage = () => {
   const AuthUser = localStorage.getItem("authUser");

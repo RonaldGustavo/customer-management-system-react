@@ -5,8 +5,13 @@ import logoCompany from "../../../assets/images/LogoCompany.png";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
+import { useSelector } from "react-redux";
+
 const Navbar = (props) => {
   const navigate = useNavigate();
+
+  // const dataUser = useSelector(state => state.loginReducer.name)
+  const dataUser = localStorage.getItem("authUser");
 
   const HandleLogout = () => {
     localStorage.removeItem("authUser");
@@ -37,7 +42,7 @@ const Navbar = (props) => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                {props.username}
+                {dataUser}
               </button>
               <ul
                 className="dropdown-menu dropdown-menu-end"
