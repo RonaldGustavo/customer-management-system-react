@@ -3,6 +3,10 @@ Created by: Ronald Gustavo
 Link Website: https://test-dbo-ronald.vercel.app
 Link GitHub: https://github.com/RonaldGustavo/Test-DBO.git
 
+login:
+username: "Ronald",
+password: "dbo123",
+
 Teknologi:
 
 Programming Language: Java Script
